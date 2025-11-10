@@ -1,0 +1,70 @@
+﻿@using Application.ViewModels.RankingSimulation.MacroindicatorSimulation
+@model SaveSimulationMacroindicatorViewModel
+@{
+    bool isEditMode = ViewBag.IsEditMode ?? false;
+    bool? wasSuccesful = ViewBag.WasSuccesful != null ? Convert.ToBoolean(ViewBag.WasSuccesful) : (bool?)null;
+
+}
+@if (ViewBag.Message != null)
+{
+
+    string tipo = wasSuccesful == true ? "success" : "danger";
+
+
+    <div class="alert alert-@tipo alert-dismissible fade show" role="alert">
+        <h3 class="lead">@ViewBag.Message </h3>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+
+    @if (wasSuccesful == true)
+    {
+        <script>
+            setTimeout(() => {
+                window.location.href = '@Url.Action("Index", "RankingSimulator")';
+            }, 2000);
+        </script>
+    }
+
+
+
+}
+<div class="col-12 col-md-6 offset-md-3">
+    <div class="card">
+        <div class="card-header bg-info text-light">
+            <h5>Agregar macroindicador  </h5>
+        </div>
+        <div class="card-body">
+
+            <form asp-controller="SimulationMacroindicators" asp-action="Add" method="post">
+                <div class="mb-3">
+                    <label asp-for="MacroindicatorId" class="form-label"> Macroindicador: </label>
+                    <select class="form-control" asp-for="MacroindicatorId">
+                        @if (Model.Macroindicators != null)
+                        {
+                            @foreach (var macro in Model.Macroindicators)
+                            {
+                                <option value="@macro.Id">@macro.Name</option>
+                            }
+                        }
+                       
+                    </select>
+                          
+           <span asp-validation-for="MacroindicatorId" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="WeightFactor" class="form-label"> Peso: </label>
+                    <input class="form-control" asp-for="WeightFactor" step="any" min="0" max="1" />
+                    <span asp-validation-for="WeightFactor" class="text-danger"></span>
+                </div>
+
+             
+
+                <div>
+                    <button type="submit" class="btn btn-outline-primary float-end">Agregar macroindicador a la simulación </button>
+                    <a asp-controller="RankingSimulator" asp-action="Index" class="btn btn-outline-success">Volver al listado de macroindicadores</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

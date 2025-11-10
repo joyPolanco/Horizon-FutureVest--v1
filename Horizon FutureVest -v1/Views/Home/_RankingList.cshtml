@@ -1,0 +1,71 @@
+﻿@using Application.ViewModels.Ranking
+@model List<RankingCountryViewModel>
+<div class="container-fluid  mt-2 ">
+   
+    @if (Model.Count < 2)
+    {
+        @if (Model.Count == 0)
+        {
+
+            <table class="table table-hover align-middle rounded bg-white">
+                <thead class="table-light border-bottom ">
+                    <tr>
+                        <th></th>
+                        <th>Nombre País</th>
+                        <th>Código ISO</th>
+                        <th>Score</th>
+                        <th>Tasa estimada de retorno</th>
+                    </tr>
+                </thead>
+                <tbody>
+                  
+                </tbody>
+            </table>
+        }
+
+        else
+        {
+            <div class=" ">
+                <p>
+                    “No hay
+                    suficiente países para poder calcular el ranking y la tasa de retorno, el único
+                    país que cumple con los requisitos es @Model.First().CountryName,debe agregar
+                    más indicadores a los demás países en el año seleccionado”
+                </p>
+                <a href="Indicators">Ir al mantenimiento de indicadores por paises</a>
+            </div>
+        }
+
+    }
+    else
+    {
+
+
+        <table class="table table-hover align-middle rounded bg-white">
+            <thead class="table-light border-bottom ">
+                <tr>
+                    <th></th>
+                    <th>Nombre País</th>
+                    <th>Código ISO</th>
+                    <th>Score</th>
+                    <th>Tasa estimada de retorno</th>
+                </tr>
+            </thead>
+            <tbody class="bg-white">
+                @for (int i= 0; i < Model.Count; i++)
+                {
+                    <tr>
+                        <td>@(i + 1)</td>
+                        <td>@Model[i].CountryName</td>
+                        <td>@Model[i].CountryIsoCode</td>
+                        <td>@Model[i].Score</td>
+                        <td>@Model[i].ReturnInvestmentRate</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+
+    }
+
+</div>

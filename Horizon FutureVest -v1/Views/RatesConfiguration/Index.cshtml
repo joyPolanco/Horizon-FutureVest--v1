@@ -1,0 +1,54 @@
+﻿@using Application.ViewModels.RateConfiguration
+
+@model SaveRateConfigurationViewModel
+
+
+@if (ViewBag.Message != null)
+{
+    <div class="alert alert-info alert-dismissible fade show text-center" role="alert">
+        <h4 class="lead">@ViewBag.Message</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+
+    <script>
+        setTimeout(() => {
+            window.location.href = '@Url.Action("Index", "RatesConfiguration")';
+        }, 2000);
+    </script>
+}
+
+<div class="d-flex justify-content-center mt-4">
+    <div class="col-12 col-md-6">
+        <div class="card shadow-sm border-0">
+            <div class="card-header bg-warning text-light text-center">
+                <h5 class="mb-0">Configurar tasas</h5>
+            </div>
+            <div class="card-body bg-light">
+                <form asp-controller="RatesConfiguration" asp-action="Update" method="post">
+
+                    <div class="mb-3">
+                        <label asp-for="MinRate" class="form-label fw-semibold">Tasa mínima estimada</label>
+                        <input class="form-control border-secondary" asp-for="MinRate" />
+                        <span asp-validation-for="MinRate" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="MaxRate" class="form-label fw-semibold">Tasa máxima esperada</label>
+                        <input class="form-control border-secondary" asp-for="MaxRate" />
+                        <span asp-validation-for="MaxRate" class="text-danger"></span>
+                    </div>
+
+                    <div class="d-flex justify-content-between">
+                        <a asp-controller="Home" asp-action="Index" class="btn btn-outline-secondary">
+                            Volver a inicio
+                        </a>
+                        <button type="submit" class="btn btn-primary">
+                            Guardar configuración
+                        </button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,45 @@
+﻿@using Application.ViewModels.MacroeconomicIndicator
+@model DeleteMacroeconomicViewModel
+@if (ViewBag.Message != null)
+{
+    <div class="alert alert-info alert-dismissible fade show" role="alert">
+        <h3 class="lead">@ViewBag.Message </h3>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    <script>
+        setTimeout(() => {
+            window.location.href = '@Url.Action("Index", "Macroindicators")';
+        }, 2000);
+    </script>
+
+
+}
+<div class="col-12 col-md-6 offset-md-3">
+    <div class="card">
+        <div class="card-header bg-danger text-light">
+            <h5>Eliminar  macroindicador</h5>
+        </div>
+        <div class="card-body">
+
+            <form asp-controller="Macroindicators" asp-action="Delete" method="post">
+                <input type="hidden" asp-for="Id" />
+                <div class="mb-3">
+                    <h4 class="text-center">  ¿Está seguro que desea eliminar este macroindicador? </h4>
+                    <label asp-for="Name" class="form-label"> Name:  </label>
+                    <input class="form-control" asp-for="Name" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+
+
+
+                <div>
+                    <a asp-controller="MacroIndicators" asp-action="Index" class="btn btn-outline-success ms-1">Cancelar</a>
+
+                    <button type="submit" class="btn btn-outline-danger float-end">Aceptar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+

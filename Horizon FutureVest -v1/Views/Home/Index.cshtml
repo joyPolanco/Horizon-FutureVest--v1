@@ -1,0 +1,53 @@
+﻿@using Application.ViewModels.Ranking
+@model RankingPageFilterViewModel
+
+<div class="row mb-3">
+    <h2 class="text-light fw-bold text-start border-bottom border-2 pb-2">
+        Ranking de Países
+    </h2>
+</div>
+
+<div class="mb-3">
+    <form asp-controller="Home" method="post" asp-action="Filter" class="p-3 rounded shadow-sm bg-white border">
+        <div class="row align-items-end g-3">
+            <div class="col-auto">
+                <label class="form-label text-secondary">Año</label>
+                <select class="form-select shadow-sm"
+                        asp-for="CurrentYearSelection"
+                        asp-items="new SelectList(Model.Years, Model.CurrentYearSelection)">
+                </select>
+            </div>
+            <div class="col-auto">
+                <button class="btn btn-primary shadow-sm px-4" type="submit">
+                    Filtrar
+                </button>
+            </div>
+        </div>
+    </form>
+</div>
+
+@if (ViewBag.SumMacroIsValid != null)
+{
+    <div class="alert alert-warning d-flex justify-content-between align-items-center shadow-sm border-0">
+        <span class="fw-light">
+            Se deben ajustar los pesos de los macroindicadores registrados hasta que la suma sea igual a 1.
+        </span>
+        <a class="btn btn-sm btn-outline-dark ms-3" href="/MacroIndicators">Ir al mantenimiento</a>
+    </div>
+}
+else if (ViewBag.NoCountriesMessage != null)
+{
+    <div class="alert alert-warning shadow-sm border-0">
+        @ViewBag.NoCountriesMessage
+    </div>
+}
+else
+{
+    <div class="table-responsive shadow-sm rounded bg-white">
+
+
+        @await Html.PartialAsync("_RankingList", Model.Countries)
+         
+     
+    </div>
+}

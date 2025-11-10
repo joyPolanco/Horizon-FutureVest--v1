@@ -1,0 +1,99 @@
+﻿@using Application.ViewModels.EconomicIndicator
+@model SaveEconomicIndicatorViewModel
+
+@{
+    bool isEditMode = ViewBag.IsEditMode ?? false;
+    bool? wasSuccesful = ViewBag.WasSuccesful != null ? Convert.ToBoolean(ViewBag.WasSuccesful) : (bool?)null;
+}
+
+@if (ViewBag.Message != null)
+{
+    <div class="alert alert-info alert-dismissible fade show" role="alert">
+        <h3 class="lead">@ViewBag.Message</h3>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+
+    @if (wasSuccesful == true)
+    {
+        <script>
+            setTimeout(() => {
+                window.location.href = '@Url.Action("Index", "Indicators")';
+            }, 2000);
+        </script>
+    }
+}
+
+<div class="col-12 col-md-6 offset-md-3">
+    <div class="card">
+        <div class="card-header @(isEditMode ? "bg-warning" : "bg-info") text-light">
+            <h5>@(isEditMode ? "Editar  " : "Agregar indicador")</h5>
+        </div>
+        <div class="card-body">
+            <form asp-controller="Indicators" asp-action="@(isEditMode ? "Edit" : "Add")" method="post">
+
+          
+
+                @if (isEditMode)
+                {
+                  <div class="mb-3">
+                    <label asp-for="MacroeconomicIndicatorId" class="form-label">Macroindicador:</label>
+                    <select asp-for="MacroeconomicIndicatorId" asp-items="ViewBag.MacroIndicators" class="form-select" disabled></select>
+                    <span asp-validation-for="MacroeconomicIndicatorId" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="CountryId" class="form-label">País:</label>
+                        <select asp-for="CountryId" asp-items="ViewBag.Countries" class="form-select" disabled></select>
+                    <span asp-validation-for="CountryId" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Year" class="form-label">Año:</label>
+                        <input asp-for="Year" class="form-control" disabled />
+                        <span asp-validation-for="Year" class="text-danger"></span>
+                </div>
+                    <input type="hidden" asp-for="MacroeconomicIndicatorId" />
+                    <input type="hidden" asp-for="CountryId" />
+                    <input type="hidden" asp-for="Year" />
+
+
+                }
+                else
+                {
+                     <div class="mb-3">
+                    <label asp-for="MacroeconomicIndicatorId" class="form-label">Macroindicador:</label>
+                    <select asp-for="MacroeconomicIndicatorId" asp-items="ViewBag.MacroIndicators" class="form-select"></select>
+                    <span asp-validation-for="MacroeconomicIndicatorId" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="CountryId" class="form-label">País:</label>
+                    <select asp-for="CountryId" asp-items="ViewBag.Countries" class="form-select" ></select>
+                    <span asp-validation-for="CountryId" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Year" class="form-label">Año:</label>
+                        <input asp-for="Year" class="form-control" />
+                        <span asp-validation-for="Year" class="text-danger"></span>
+                </div>
+                }
+
+
+                <div class="mb-3">
+                    <label asp-for="Value" class="form-label">Valor:</label>
+                    <input class="form-control" asp-for="Value" />
+                    <span asp-validation-for="Value" class="text-danger"></span>
+                </div>
+
+                <div>
+                    <button type="submit" class="btn btn-outline-primary float-end">
+                        @(isEditMode ? "Guardar cambios" : "Agregar indicador")
+                    </button>
+                    <a asp-controller="Indicators" asp-action="Index" class="btn btn-outline-success">Volver al listado</a>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>

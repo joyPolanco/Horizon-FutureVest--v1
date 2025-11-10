@@ -1,0 +1,71 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+html {
+  position: relative;
+  min-height: 100%;
+}
+body {
+    margin-bottom: 60px;
+    background-color: #3d3d3d;
+    color: #f5f5f5;
+    padding-top: 70px; 
+}
+
+.form-floating > .form-control-plaintext::placeholder, .form-floating > .form-control::placeholder {
+  color: var(--bs-secondary-color);
+  text-align: end;
+}
+
+.form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
+  text-align: start;
+}
+
+header {
+    background-color: red;
+    z-index:2000;
+}
+
+.navbar, .footer {
+    background-color: #3d3d3d !important;
+    color: #f5f5f5;
+    border: 2px solid #3d3d3d!important;
+}
+.footer {
+    color: #f5f5f5!important;
+}
+
+a {
+    color: #bb86fc;
+}
+.navbar {
+    background-color: #2e2d2d !important;
+  
+}
+    .navbar a {
+        color: #ffffff !important;
+    }
+    .navbar .nav-link {
+        color: #a7a7a7 !important;
+    }
+
+
+    main {
+        min-height:80vh!important;
+    }
