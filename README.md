@@ -1,7 +1,3 @@
-El problema ocurre porque **Markdown (el formato de README de GitHub)** necesita ciertos símbolos para estructurar correctamente los títulos, listas y bloques de código.
-Si no se usan, el texto aparece **desordenado y los temas se “pegan” entre sí**.
-
-A continuación se muestra **el mismo contenido con formato Markdown correcto**, listo para pegar directamente en `README.md` para que GitHub lo renderice limpio.
 
 ---
 
